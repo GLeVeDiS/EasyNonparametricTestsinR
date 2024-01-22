@@ -52,3 +52,17 @@ significant_comparisons <- dunn_groups[dunn_groups$P.adjusted < 0.05, c("Compari
 # Display resulting data frame
 print(significant_comparisons)
 # Print data frame with significant group comparisons and their adjusted p-values
+
+# Additional script for pairwise Wilcoxon test
+# Check if the Kruskal-Wallis test is significant
+if (kruskal_result$p.value < 0.05) {
+  # Perform Dunn's test with Bonferroni correction for multiple comparisons
+  dunn_result <- dunn.test(yourdataset$Value, yourdataset$group, method = "bonferroni")
+  
+  # Display post hoc test results
+  print(dunn_result)
+} else {
+  # If the Kruskal-Wallis test is not significant, print a message or take other actions
+  print("No significant differences detected in the Kruskal-Wallis test.")
+}
+
