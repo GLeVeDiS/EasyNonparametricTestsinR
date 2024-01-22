@@ -1,3 +1,7 @@
+#install and load the dunn.test package
+install.packages("dunn.test")
+library(dunn.test)
+
 # Set seed for reproducibility
 set.seed(123)
 
@@ -38,6 +42,7 @@ dunn_groups <- data.frame(
   Comparison = dunn_result$comparisons,
   P.adjusted = dunn_result$P.adjusted
 )
+
 # Create 'dunn_groups' data frame with comparison groups and adjusted p-values from Dunn's test
 
 # Filter rows where P.adjusted is < 0.05
