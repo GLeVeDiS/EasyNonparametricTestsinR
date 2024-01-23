@@ -1,5 +1,7 @@
-#install and load the dunn.test package
-install.packages("dunn.test")
+# Install and load required packages with error handling
+if (!requireNamespace("dunn.test", quietly = TRUE)) {
+  install.packages("dunn.test")
+}
 library(dunn.test)
 
 # Set seed for reproducibility
@@ -66,3 +68,4 @@ if (kruskal_result$p.value < 0.05) {
   print("No significant differences detected in the Kruskal-Wallis test.")
 }
 
+# End of script
