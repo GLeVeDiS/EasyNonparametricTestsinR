@@ -1,3 +1,8 @@
+# Statistical Analysis and Visualization Script
+# This script performs statistical analysis on a generated dataset with three groups
+# using Kruskal-Wallis test and conducts post hoc tests (Dunn's test) for multiple comparisons.
+# Additionally, it creates a boxplot visualization of the dataset.
+
 # Install and load required packages with error handling
 if (!requireNamespace("dunn.test", quietly = TRUE)) {
   install.packages("dunn.test")
@@ -68,4 +73,26 @@ if (kruskal_result$p.value < 0.05) {
   print("No significant differences detected in the Kruskal-Wallis test.")
 }
 
-# End of script
+# Boxplot visualization
+par(mar = c(5, 5, 4, 2) + 0.1, cex.lab = 1.8)  # Adjust the values as needed
+
+# Set y-axis label size
+ylim <- c(0, max_observed + 0.25 * max_observed)
+
+# Generate colors based on the number of unique groups
+colors <- rainbow(length(unique(yourdataset$group)))
+
+# Create the boxplot
+myplot <- boxplot(yourdataset$Value ~ yourdataset$group, 
+                  ylab = "Value", boxwex = 0.5, xaxt = "n", yaxt = "n",
+                  col = colors, ylim = ylim)    
+
+# Set axis labels and appearance
+axis(1, at = 1:length(unique(yourdataset$group)), labels = unique(yourdataset$group), 
+     cex.axis = 1.5, font.axis = 2, tick = FALSE, cex = 0.3)
+
+axis(2, cex.axis = 1.2, font.axis = 2, ylab = "")  # Set y-axis label to an empty string
+
+
+
+### End of script
